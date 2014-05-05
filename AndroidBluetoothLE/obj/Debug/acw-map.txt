@@ -1,0 +1,2 @@
+AndroidBluetoothLE.Client.BluetoothDeviceScanner;androidbluetoothle.client.BluetoothDeviceScanner
+AndroidBluetoothLE.HomeScanView;androidbluetoothle.HomeScanView
