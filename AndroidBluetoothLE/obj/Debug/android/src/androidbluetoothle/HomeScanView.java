@@ -10,6 +10,7 @@ public class HomeScanView
 	static {
 		__md_methods = 
 			"n_onCreate:(Landroid/os/Bundle;)V:GetOnCreate_Landroid_os_Bundle_Handler\n" +
+			"n_onStart:()V:GetOnStartHandler\n" +
 			"n_onCreateOptionsMenu:(Landroid/view/Menu;)Z:GetOnCreateOptionsMenu_Landroid_view_Menu_Handler\n" +
 			"";
 		mono.android.Runtime.register ("AndroidBluetoothLE.HomeScanView, AndroidBluetoothLE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", HomeScanView.class, __md_methods);
@@ -30,6 +31,14 @@ public class HomeScanView
 	}
 
 	private native void n_onCreate (android.os.Bundle p0);
+
+
+	public void onStart ()
+	{
+		n_onStart ();
+	}
+
+	private native void n_onStart ();
 
 
 	public boolean onCreateOptionsMenu (android.view.Menu p0)

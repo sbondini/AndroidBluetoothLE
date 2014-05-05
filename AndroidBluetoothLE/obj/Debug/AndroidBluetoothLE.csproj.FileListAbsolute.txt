@@ -12,3 +12,4 @@ D:\Projects\AndroidBluetoothLE\AndroidBluetoothLE\obj\Debug\res\values\strings.x
 D:\Projects\AndroidBluetoothLE\AndroidBluetoothLE\obj\Debug\res\drawable\icon.png
 D:\Projects\AndroidBluetoothLE\AndroidBluetoothLE\obj\Debug\R.cs.flag
 D:\Projects\AndroidBluetoothLE\AndroidBluetoothLE\obj\Debug\uploadflags.txt
+D:\Projects\AndroidBluetoothLE\AndroidBluetoothLE\obj\Debug\res\layout\scanrow.xml

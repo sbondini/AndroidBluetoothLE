@@ -23,13 +23,6 @@ public class BluetoothDeviceScanner
 			mono.android.TypeManager.Activate ("AndroidBluetoothLE.Client.BluetoothDeviceScanner, AndroidBluetoothLE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
 	}
 
-	public BluetoothDeviceScanner (android.bluetooth.BluetoothAdapter p0) throws java.lang.Throwable
-	{
-		super ();
-		if (getClass () == BluetoothDeviceScanner.class)
-			mono.android.TypeManager.Activate ("AndroidBluetoothLE.Client.BluetoothDeviceScanner, AndroidBluetoothLE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "Android.Bluetooth.BluetoothAdapter, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065", this, new java.lang.Object[] { p0 });
-	}
-
 
 	public void onLeScan (android.bluetooth.BluetoothDevice p0, int p1, byte[] p2)
 	{

@@ -1,22 +1,21 @@
 using System;
-using System.Diagnostics;
 using Android.Bluetooth;
 
 namespace AndroidBluetoothLE.Client
 {
     public class BluetoothDeviceScanner : Java.Lang.Object, BluetoothAdapter.ILeScanCallback
     {
-        private Action<BluetoothDevice> _onDiscoveredPeripheral;
+        private readonly Action<BluetoothDevice> _onDiscoveredPeripheral;
         private readonly BluetoothAdapter _adapter;
 
-        public BluetoothDeviceScanner(BluetoothAdapter adapter)
+        public BluetoothDeviceScanner(BluetoothAdapter adapter, Action<BluetoothDevice> onDiscoveredPeripheral)
         {
             _adapter = adapter;
+            _onDiscoveredPeripheral = onDiscoveredPeripheral;
         }
 
-        public void StartScan(Action<BluetoothDevice> onDiscoveredPeripheral)
+        public void StartScan()
         {
-            _onDiscoveredPeripheral = onDiscoveredPeripheral;
             _adapter.StartLeScan(this);
         }
 

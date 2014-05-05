@@ -60,8 +60,14 @@ namespace AndroidBluetoothLE
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f050002
+			public const int ScanList = 2131034114;
+			
 			// aapt resource value: 0x7f050000
 			public const int action_search = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int label = 2131034113;
 			
 			static Id()
 			{
@@ -80,7 +86,10 @@ namespace AndroidBluetoothLE
 			public const int ScanMenu = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int ScanView = 2130903041;
+			public const int ScanRow = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int ScanView = 2130903042;
 			
 			static Layout()
 			{

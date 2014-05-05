@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\BluetoothClient.cs" />
     <Compile Include="Client\BluetoothDeviceScanner.cs" />
     <Compile Include="HomeScanView.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -66,6 +67,9 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\ScanMenu.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\ScanRow.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
