@@ -6,8 +6,9 @@
   <!--In order to use blutooth in application-->
   <uses-permission android:name="android.permission.BLUETOOTH" />
   <!--App is available not only to BLE-capable devices-->
-  <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
+  <uses-feature android:name="android.hardware.bluetooth_le" android:required="true" />
   <application android:name="mono.android.app.Application" android:debuggable="true">
+    <activity android:label="DeviceView" android:name="androidbluetoothle.DeviceView" />
     <activity android:label="BluetoothLE" android:name="androidbluetoothle.HomeScanView">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

@@ -1,12 +1,14 @@
 using System;
 using Android.Bluetooth;
 
-namespace AndroidBluetoothLE.Client
+namespace AndroidBluetoothLE.Bluetooth.Client
 {
     public class BluetoothDeviceScanner : Java.Lang.Object, BluetoothAdapter.ILeScanCallback
     {
         private readonly Action<BluetoothDevice> _onDiscoveredPeripheral;
         private readonly BluetoothAdapter _adapter;
+
+        public bool IsScanning { get; private set; }
 
         public BluetoothDeviceScanner(BluetoothAdapter adapter, Action<BluetoothDevice> onDiscoveredPeripheral)
         {
@@ -16,11 +18,13 @@ namespace AndroidBluetoothLE.Client
 
         public void StartScan()
         {
+            IsScanning = true;
             _adapter.StartLeScan(this);
         }
 
         public void StopScan()
         {
+            IsScanning = false;
             _adapter.StopLeScan(this);
         }
 

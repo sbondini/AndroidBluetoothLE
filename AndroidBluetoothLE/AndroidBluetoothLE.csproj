@@ -54,8 +54,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\BluetoothClient.cs" />
-    <Compile Include="Client\BluetoothDeviceScanner.cs" />
+    <Compile Include="Bluetooth\BluetoothServiceInfo.cs" />
+    <Compile Include="Bluetooth\Client\BluetoothClient.cs" />
+    <Compile Include="Bluetooth\Client\BluetoothConnectionHandler.cs" />
+    <Compile Include="Bluetooth\Client\DeviceObservingHandler.cs" />
+    <Compile Include="Bluetooth\Client\DevicePairingHandler.cs" />
+    <Compile Include="Bluetooth\Client\DeviceWritingHandler.cs" />
+    <Compile Include="Bluetooth\Client\BluetoothDeviceScanner.cs" />
+    <Compile Include="Bluetooth\Client\GattClientObserver.cs" />
+    <Compile Include="Bluetooth\DeviceUuidContainer.cs" />
+    <Compile Include="Bluetooth\Server\BluetoothServer.cs" />
+    <Compile Include="Bluetooth\Server\BluetoothServiceFactory.cs" />
+    <Compile Include="Bluetooth\Server\GattServerObserver.cs" />
+    <Compile Include="DeviceView.cs" />
+    <Compile Include="Extension\UuidExtension.cs" />
     <Compile Include="HomeScanView.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +84,9 @@
     <AndroidResource Include="Resources\Layout\ScanRow.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\Layout\DeviceView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Values\Strings.xml" />
@@ -82,9 +97,7 @@
   <ItemGroup>
     <Content Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Server\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
      Other similar extension points exist, see Microsoft.Common.targets.

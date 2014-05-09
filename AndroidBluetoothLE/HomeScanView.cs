@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Android.App;
 using Android.Bluetooth;
+using Android.Content;
 using Android.Views;
 using Android.OS;
 using Android.Widget;
-using AndroidBluetoothLE.Client;
+using AndroidBluetoothLE.Bluetooth.Client;
+using AndroidBluetoothLE.Bluetooth.Server;
 
 namespace AndroidBluetoothLE
 {
@@ -15,6 +17,9 @@ namespace AndroidBluetoothLE
     {
         private readonly List<BluetoothDevice> _deviceList;
         private ArrayAdapter<string> _adapter;
+        private BluetoothClient _bluetoothClient;
+        private BluetoothDeviceScanner _scanner;
+        private BluetoothServer _bluetoothServer;
 
         public HomeScanView()
         {
@@ -26,32 +31,43 @@ namespace AndroidBluetoothLE
             base.OnCreate(bundle);
 
             SetContentView(Resource.Layout.ScanView);
-            CreateListView();
         }
 
         protected override void OnStart()
         {
             base.OnStart();
-            StartScanning();
-        }
+            CreateListView();
+            InvalidateOptionsMenu();
 
-        public void StartScanning()
-        {
-            var bluetoothClient = new BluetoothClient();
-            if (bluetoothClient.Initialize())
+            _bluetoothClient = BluetoothClient.Instance;
+            _bluetoothServer = BluetoothServer.Instance;
+
+            if (_bluetoothClient.Initialize())
             {
-                var scanner = new BluetoothDeviceScanner(bluetoothClient.Adapter, OnDiscoveredPeripheral);
-                scanner.StartScan();
+                _scanner = new BluetoothDeviceScanner(_bluetoothClient.Adapter, OnDiscoveredPeripheral);
             }
         }
 
         private void CreateListView()
         {
             var listView = FindViewById<ListView>(Resource.Id.ScanList);
-            var adapter = new ArrayAdapter<string>(this, Resource.Layout.ScanRow, Resource.Id.label);
+            listView.ItemClick += ListViewOnItemClick;
             
+            var adapter = new ArrayAdapter<string>(this, Resource.Layout.ScanRow, Resource.Id.label);
             listView.Adapter = adapter;
             _adapter = adapter;
+        }
+
+        private void ListViewOnItemClick(object sender, AdapterView.ItemClickEventArgs args)
+        {
+            var name = _adapter.GetItem(args.Position);
+
+            var device = _deviceList.First(d => d.Name.Equals(name));
+            _bluetoothClient.SelectedDevice = device;
+            _scanner.StopScan();
+
+            var intent = new Intent(this, typeof (DeviceView));
+            StartActivity(intent);
         }
 
         private void OnDiscoveredPeripheral(BluetoothDevice device)
@@ -70,8 +86,36 @@ namespace AndroidBluetoothLE
         public override bool OnCreateOptionsMenu(IMenu menu)
         {
             MenuInflater.Inflate(Resource.Layout.ScanMenu, menu);
-
             return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnMenuItemSelected(int featureId, IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.ScanAction:
+                    item.SetTitle(_scanner.IsScanning ? Resource.String.StartScan : Resource.String.StopScan);
+                    if (_scanner.IsScanning)
+                    {
+                        _scanner.StopScan();
+                        break;
+                    }
+                    _scanner.StartScan();
+                    break;
+
+                case Resource.Id.OpenServerAction:
+                    item.SetTitle(_bluetoothServer.IsOpened ?  Resource.String.OpenServer : Resource.String.CloseServer);
+                    if (_bluetoothServer.IsOpened)
+                    {
+                        _bluetoothServer.Close();
+                    }
+                    else
+                    {
+                        _bluetoothServer.Open();
+                    }
+                    break;
+            }
+            return true;
         }
     }
 }

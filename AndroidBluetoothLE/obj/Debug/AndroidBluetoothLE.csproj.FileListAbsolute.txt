@@ -13,3 +13,4 @@ D:\Projects\AndroidBluetoothLE\AndroidBluetoothLE\obj\Debug\res\drawable\icon.pn
 D:\Projects\AndroidBluetoothLE\AndroidBluetoothLE\obj\Debug\R.cs.flag
 D:\Projects\AndroidBluetoothLE\AndroidBluetoothLE\obj\Debug\uploadflags.txt
 D:\Projects\AndroidBluetoothLE\AndroidBluetoothLE\obj\Debug\res\layout\scanrow.xml
+D:\Projects\AndroidBluetoothLE\AndroidBluetoothLE\obj\Debug\res\layout\deviceview.xml

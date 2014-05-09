@@ -60,14 +60,29 @@ namespace AndroidBluetoothLE
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050002
-			public const int ScanList = 2131034114;
-			
-			// aapt resource value: 0x7f050000
-			public const int action_search = 2131034112;
+			// aapt resource value: 0x7f050005
+			public const int OpenServerAction = 2131034117;
 			
 			// aapt resource value: 0x7f050001
-			public const int label = 2131034113;
+			public const int PairingButton = 2131034113;
+			
+			// aapt resource value: 0x7f050000
+			public const int ReconnectButton = 2131034112;
+			
+			// aapt resource value: 0x7f050004
+			public const int ScanAction = 2131034116;
+			
+			// aapt resource value: 0x7f050007
+			public const int ScanList = 2131034119;
+			
+			// aapt resource value: 0x7f050002
+			public const int SendDataButton = 2131034114;
+			
+			// aapt resource value: 0x7f050003
+			public const int TextView = 2131034115;
+			
+			// aapt resource value: 0x7f050006
+			public const int label = 2131034118;
 			
 			static Id()
 			{
@@ -83,13 +98,16 @@ namespace AndroidBluetoothLE
 		{
 			
 			// aapt resource value: 0x7f030000
-			public const int ScanMenu = 2130903040;
+			public const int DeviceView = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int ScanRow = 2130903041;
+			public const int ScanMenu = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int ScanView = 2130903042;
+			public const int ScanRow = 2130903042;
+			
+			// aapt resource value: 0x7f030003
+			public const int ScanView = 2130903043;
 			
 			static Layout()
 			{
@@ -107,8 +125,20 @@ namespace AndroidBluetoothLE
 			// aapt resource value: 0x7f040001
 			public const int ApplicationName = 2130968577;
 			
+			// aapt resource value: 0x7f040005
+			public const int CloseServer = 2130968581;
+			
 			// aapt resource value: 0x7f040000
 			public const int Hello = 2130968576;
+			
+			// aapt resource value: 0x7f040004
+			public const int OpenServer = 2130968580;
+			
+			// aapt resource value: 0x7f040002
+			public const int StartScan = 2130968578;
+			
+			// aapt resource value: 0x7f040003
+			public const int StopScan = 2130968579;
 			
 			static String()
 			{

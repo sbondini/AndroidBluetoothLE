@@ -12,6 +12,7 @@ public class HomeScanView
 			"n_onCreate:(Landroid/os/Bundle;)V:GetOnCreate_Landroid_os_Bundle_Handler\n" +
 			"n_onStart:()V:GetOnStartHandler\n" +
 			"n_onCreateOptionsMenu:(Landroid/view/Menu;)Z:GetOnCreateOptionsMenu_Landroid_view_Menu_Handler\n" +
+			"n_onMenuItemSelected:(ILandroid/view/MenuItem;)Z:GetOnMenuItemSelected_ILandroid_view_MenuItem_Handler\n" +
 			"";
 		mono.android.Runtime.register ("AndroidBluetoothLE.HomeScanView, AndroidBluetoothLE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", HomeScanView.class, __md_methods);
 	}
@@ -47,6 +48,14 @@ public class HomeScanView
 	}
 
 	private native boolean n_onCreateOptionsMenu (android.view.Menu p0);
+
+
+	public boolean onMenuItemSelected (int p0, android.view.MenuItem p1)
+	{
+		return n_onMenuItemSelected (p0, p1);
+	}
+
+	private native boolean n_onMenuItemSelected (int p0, android.view.MenuItem p1);
 
 	java.util.ArrayList refList;
 	public void monodroidAddReference (java.lang.Object obj)
