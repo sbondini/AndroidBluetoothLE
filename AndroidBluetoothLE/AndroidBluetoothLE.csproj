@@ -54,23 +54,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bluetooth\BluetoothServiceInfo.cs" />
+    <Compile Include="DialogView.cs" />
     <Compile Include="Bluetooth\Client\BluetoothClient.cs" />
     <Compile Include="Bluetooth\Client\BluetoothConnectionHandler.cs" />
-    <Compile Include="Bluetooth\Client\DeviceObservingHandler.cs" />
+    <Compile Include="Bluetooth\Client\DeviceNotifyingHandler.cs" />
     <Compile Include="Bluetooth\Client\DevicePairingHandler.cs" />
+    <Compile Include="Bluetooth\Client\DeviceReadingHandler.cs" />
     <Compile Include="Bluetooth\Client\DeviceWritingHandler.cs" />
     <Compile Include="Bluetooth\Client\BluetoothDeviceScanner.cs" />
     <Compile Include="Bluetooth\Client\GattClientObserver.cs" />
-    <Compile Include="Bluetooth\DeviceUuidContainer.cs" />
     <Compile Include="Bluetooth\Server\BluetoothServer.cs" />
     <Compile Include="Bluetooth\Server\BluetoothServiceFactory.cs" />
     <Compile Include="Bluetooth\Server\GattServerObserver.cs" />
     <Compile Include="DeviceView.cs" />
     <Compile Include="Extension\UuidExtension.cs" />
     <Compile Include="HomeScanView.cs" />
+    <Compile Include="NotifyCharacteristicView.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceList\ServiceListAdapter.cs" />
+    <Compile Include="ServiceList\ServiceListItem.cs" />
+    <Compile Include="ReadCharacteristicView.cs" />
+    <Compile Include="ServiceListView.cs" />
+    <Compile Include="WriteCharacteristicView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -85,6 +91,21 @@
       <SubType>AndroidResource</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\Layout\DeviceView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\ServiceListView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\ServiceRow.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\ReadCharacteristicView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\WriteCharacteristicView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\Layout\NotifyCharacteristicView.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -11,16 +11,6 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:id="@+id/PairingButton"
-        android:text="Pair With Device" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:id="@+id/SendDataButton"
-        android:text="Send Data" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/TextView"
-        android:background="@android:color/background_light" />
+        android:id="@+id/DiscoverServicesButton"
+        android:text="Discover services" />
 </LinearLayout>

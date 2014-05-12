@@ -5,14 +5,21 @@ using Java.Util;
 
 namespace AndroidBluetoothLE.Bluetooth.Client
 {
-    public class DeviceObservingHandler
+    public delegate void NotifyValueChangedEventHandler(
+        BluetoothGatt gatt, BluetoothGattCharacteristic characteristic);
+
+    public class DeviceNotifyingHandler : IDisposable
     {
         private readonly BluetoothGatt _gatt;
         private Action<bool> _onSubscribed;
+        private GattClientObserver _gattObserver;
 
-        public DeviceObservingHandler(BluetoothGatt gatt, GattClientObserver gattObserver)
+        public event NotifyValueChangedEventHandler ValueChanged;
+
+        public DeviceNotifyingHandler(BluetoothGatt gatt, GattClientObserver gattObserver)
         {
             _gatt = gatt;
+            _gattObserver = gattObserver;
             gattObserver.CharacteristicValueChanged += OnCharacteristicValueChanged;
             gattObserver.DescriptorWritten += OnDescriptorWritten;
         }
@@ -25,26 +32,22 @@ namespace AndroidBluetoothLE.Bluetooth.Client
             }
         }
 
-        public void Subscribe(BluetoothServiceInfo serviceInfo, Action<bool> onSubscribed)
+        public void Subscribe(BluetoothGattCharacteristic characteristic, Action<bool> onSubscribed)
         {
             _onSubscribed = onSubscribed;
-
-            var characteristic = _gatt.GetService(serviceInfo.ServiceUuid)
-                                      .GetCharacteristic(serviceInfo.CharacteristicUuid);
 
             SubscribeCharacteristic(characteristic);
         }
 
-        public void Unsubscribe(BluetoothServiceInfo serviceInfo)
+        public void Unsubscribe(BluetoothGattCharacteristic characteristic)
         {
-            var characteristic = _gatt.GetService(serviceInfo.ServiceUuid)
-                                      .GetCharacteristic(serviceInfo.CharacteristicUuid);
             _gatt.SetCharacteristicNotification(characteristic, false);
         }
 
         private void OnCharacteristicValueChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic)
         {
-            
+            var handler = ValueChanged;
+            if (handler != null) handler(gatt, characteristic);
         }
 
         private void SubscribeCharacteristic(BluetoothGattCharacteristic characteristic)
@@ -54,6 +57,12 @@ namespace AndroidBluetoothLE.Bluetooth.Client
             var descriptor = characteristic.GetDescriptor(UUID.FromString("00002902-0000-1000-8000-00805f9b34fb"));
             descriptor.SetValue(BluetoothGattDescriptor.EnableNotificationValue.ToArray());
             _gatt.WriteDescriptor(descriptor);
+        }
+
+        public void Dispose()
+        {
+            _gattObserver.CharacteristicValueChanged -= OnCharacteristicValueChanged;
+            _gattObserver.DescriptorWritten -= OnDescriptorWritten;
         }
     }
 }

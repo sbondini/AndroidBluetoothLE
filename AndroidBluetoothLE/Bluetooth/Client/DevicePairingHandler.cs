@@ -21,12 +21,12 @@ namespace AndroidBluetoothLE.Bluetooth.Client
 
         public void Pair(Action<bool> onPairingFinished)
         {
-            _onPairingFinished = onPairingFinished;
-            var observingHandler = new DeviceObservingHandler(_gatt, _gattObserver);
-
-            var serviceInfo = new BluetoothServiceInfo(DeviceUuidContainer.UartService,
-                DeviceUuidContainer.NotifyCharacteristic);
-            observingHandler.Subscribe(serviceInfo, b => observingHandler.Unsubscribe(serviceInfo));
+//            _onPairingFinished = onPairingFinished;
+//            var observingHandler = new DeviceNotifyingHandler(_gatt, _gattObserver);
+//
+//            var serviceInfo = new BluetoothServiceInfo(DeviceUuidContainer.UartService,
+//                DeviceUuidContainer.NotifyCharacteristic);
+//            observingHandler.Subscribe(serviceInfo, b => observingHandler.Unsubscribe(serviceInfo));
         }
 
 

@@ -8,6 +8,9 @@ namespace AndroidBluetoothLE.Bluetooth.Client
     public delegate void CharacteristicWrittenEventHandler(
         BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, GattStatus statuc);
     public delegate void DescriptorWrittenEventHandler(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, GattStatus status);
+    public delegate void CharacteristicReadEventHandler(
+        BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, GattStatus status);
+
 
     public class GattClientObserver : BluetoothGattCallback
     {
@@ -23,6 +26,8 @@ namespace AndroidBluetoothLE.Bluetooth.Client
         public event CharacteristicValueChangedEventHandler CharacteristicValueChanged;
         public event CharacteristicWrittenEventHandler CharacteristicWritten;
         public event DescriptorWrittenEventHandler DescriptorWritten;
+        public event CharacteristicReadEventHandler CharacteristicRead;
+
 
         public override void OnServicesDiscovered(BluetoothGatt gatt, GattStatus status)
         {
@@ -35,6 +40,12 @@ namespace AndroidBluetoothLE.Bluetooth.Client
             var handler = ConnectionStateChanged;
             if (handler != null) handler(gatt, status, newState);
             
+        }
+
+        public override void OnCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, GattStatus status)
+        {
+            var handler = CharacteristicRead;
+            if (handler != null) handler(gatt, characteristic, status);
         }
 
         public override void OnCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic)
@@ -56,4 +67,6 @@ namespace AndroidBluetoothLE.Bluetooth.Client
             if (handler != null) handler(gatt, descriptor, status);
         }
     }
+
+    
 }

@@ -36,7 +36,7 @@ namespace AndroidBluetoothLE
         protected override void OnStart()
         {
             base.OnStart();
-            CreateListView();
+            InitializeListView();
             InvalidateOptionsMenu();
 
             _bluetoothClient = BluetoothClient.Instance;
@@ -48,7 +48,13 @@ namespace AndroidBluetoothLE
             }
         }
 
-        private void CreateListView()
+        protected override void OnStop()
+        {
+            base.OnStop();
+            _deviceList.Clear();
+        }
+
+        private void InitializeListView()
         {
             var listView = FindViewById<ListView>(Resource.Id.ScanList);
             listView.ItemClick += ListViewOnItemClick;

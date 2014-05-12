@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using Android.App;
 using Android.Bluetooth;
@@ -10,6 +11,7 @@ namespace AndroidBluetoothLE.Bluetooth.Client
     {
         private static BluetoothClient _instance;
         private bool _isInitialized;
+        private BluetoothConnectionHandler _connectionHandler; 
 
         public static BluetoothClient Instance { get { return _instance ?? (_instance = new BluetoothClient()); } }
 
@@ -18,6 +20,11 @@ namespace AndroidBluetoothLE.Bluetooth.Client
         public BluetoothAdapter Adapter { get; private set; }
 
         public BluetoothDevice SelectedDevice { get; set; }
+
+        public BluetoothConnectionHandler ConnectionHandler
+        {
+            get { return _connectionHandler ?? (_connectionHandler = new BluetoothConnectionHandler(Manager)); }
+        }
 
         public bool Initialize()
         {
