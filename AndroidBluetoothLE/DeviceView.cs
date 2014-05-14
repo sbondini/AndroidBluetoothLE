@@ -3,15 +3,16 @@ using Android.App;
 using Android.Bluetooth;
 using Android.Content;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using AndroidBluetoothLE.Bluetooth.Client;
+using AndroidBluetoothLE.Bluetooth.Server;
 
 namespace AndroidBluetoothLE
 {
     [Activity(Label = "DeviceView")]
     public class DeviceView : Activity
     {
-        private Dialog _currentDialog;
         private BluetoothConnectionHandler _connectionHandler;
 
         protected override void OnCreate(Bundle bundle)
@@ -21,14 +22,22 @@ namespace AndroidBluetoothLE
             _connectionHandler = BluetoothClient.Instance.ConnectionHandler;
 
             FindViewById<Button>(Resource.Id.DiscoverServicesButton).Click += DiscoverServicesButtonClick;
+            FindViewById<Button>(Resource.Id.ReconnectButton).Click += OnReconnect;
+
+            var serverVisibility = BluetoothServer.Instance.IsOpened ? ViewStates.Visible : ViewStates.Invisible;
+            FindViewById<TextView>(Resource.Id.ServerRequestCaption).Visibility = serverVisibility;
+            FindViewById<TextView>(Resource.Id.ServerRequestText).Visibility = serverVisibility;
         }
 
         private async void OnReconnect(object sender, EventArgs eventArgs)
         {
-//            _connectionHandler.Disconnect();
-//            ShowDialog("Disconnecting...");
-//            await Task.Delay(2000);
-//            ConnectDevice();
+            if (_connectionHandler.IsConnected)
+            {
+                ShowDialog("Disconnecting...");
+                await _connectionHandler.DisconnectAsync();
+            }
+
+            ConnectDevice();
         }
 
         private void DiscoverServicesButtonClick(object sender, EventArgs eventArgs)

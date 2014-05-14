@@ -1,4 +1,7 @@
 using Android.Bluetooth;
+using Android.OS;
+using Android.Util;
+using Debug = System.Diagnostics.Debug;
 
 namespace AndroidBluetoothLE.Bluetooth.Client
 {

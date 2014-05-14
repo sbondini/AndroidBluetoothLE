@@ -10,8 +10,7 @@ namespace AndroidBluetoothLE.Bluetooth.Client
     public class BluetoothClient
     {
         private static BluetoothClient _instance;
-        private bool _isInitialized;
-        private BluetoothConnectionHandler _connectionHandler; 
+        private BluetoothConnectionHandler _connectionHandler;
 
         public static BluetoothClient Instance { get { return _instance ?? (_instance = new BluetoothClient()); } }
 
@@ -20,31 +19,32 @@ namespace AndroidBluetoothLE.Bluetooth.Client
         public BluetoothAdapter Adapter { get; private set; }
 
         public BluetoothDevice SelectedDevice { get; set; }
+        
+        public bool IsInitialized { get; private set; }
 
         public BluetoothConnectionHandler ConnectionHandler
         {
             get { return _connectionHandler ?? (_connectionHandler = new BluetoothConnectionHandler(Manager)); }
         }
 
-        public bool Initialize()
+        public void Initialize()
         {
-            if (_isInitialized) return false;
+            if (IsInitialized) return;
 
             var context = Application.Context;
 
             if (!context.PackageManager.HasSystemFeature(PackageManager.FeatureBluetoothLe))
             {
                 Debug.WriteLine("Bluetooth LE is not supported");
-                return false;
+                return;
             }
-            _isInitialized = true;
+
+            IsInitialized = true;
 
             var manager = (BluetoothManager)context.GetSystemService(Context.BluetoothService);
             
             Manager = manager;
             Adapter = manager.Adapter;
-            
-            return true;
         }
 
         public void EnableIfNeeded(BluetoothAdapter adapter)

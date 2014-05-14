@@ -13,4 +13,15 @@
         android:layout_height="60dp"
         android:id="@+id/DiscoverServicesButton"
         android:text="Discover services" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Requests received as a server"
+        android:layout_marginTop="10dp"
+        android:id="@+id/ServerRequestCaption" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ServerRequestText"
+        android:background="@android:color/background_light" />
 </LinearLayout>

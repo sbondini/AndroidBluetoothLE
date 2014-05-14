@@ -12,7 +12,7 @@ using Java.Util;
 namespace AndroidBluetoothLE
 {
     [Activity(Label = "Notify Characteristic")]
-    public class NotifyCharacteristicView : Activity
+    public class NotifyCharacteristicView : BaseCharacteristicView
     {
         private DeviceNotifyingHandler _notifyHandler;
         private BluetoothGattCharacteristic _characteristic;

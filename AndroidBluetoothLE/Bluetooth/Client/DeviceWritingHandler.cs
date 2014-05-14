@@ -1,9 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Android.Bluetooth;
-using AndroidBluetoothLE.Extension;
-using Java.Util;
 
 namespace AndroidBluetoothLE.Bluetooth.Client
 {

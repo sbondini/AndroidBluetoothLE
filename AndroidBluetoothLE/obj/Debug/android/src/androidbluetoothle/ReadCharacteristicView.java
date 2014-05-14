@@ -2,7 +2,7 @@ package androidbluetoothle;
 
 
 public class ReadCharacteristicView
-	extends android.app.Activity
+	extends androidbluetoothle.BaseCharacteristicView
 	implements
 		mono.android.IGCUserPeer
 {

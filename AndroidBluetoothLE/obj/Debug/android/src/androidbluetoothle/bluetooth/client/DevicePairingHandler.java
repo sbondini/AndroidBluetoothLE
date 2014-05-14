@@ -22,11 +22,11 @@ public class DevicePairingHandler
 			mono.android.TypeManager.Activate ("AndroidBluetoothLE.Bluetooth.Client.DevicePairingHandler, AndroidBluetoothLE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "", this, new java.lang.Object[] {  });
 	}
 
-	public DevicePairingHandler (android.bluetooth.BluetoothGatt p0, androidbluetoothle.bluetooth.client.GattClientObserver p1) throws java.lang.Throwable
+	public DevicePairingHandler (android.app.Activity p0) throws java.lang.Throwable
 	{
 		super ();
 		if (getClass () == DevicePairingHandler.class)
-			mono.android.TypeManager.Activate ("AndroidBluetoothLE.Bluetooth.Client.DevicePairingHandler, AndroidBluetoothLE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "Android.Bluetooth.BluetoothGatt, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065:AndroidBluetoothLE.Bluetooth.Client.GattClientObserver, AndroidBluetoothLE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", this, new java.lang.Object[] { p0, p1 });
+			mono.android.TypeManager.Activate ("AndroidBluetoothLE.Bluetooth.Client.DevicePairingHandler, AndroidBluetoothLE, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null", "Android.App.Activity, Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065", this, new java.lang.Object[] { p0 });
 	}
 
 

@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Bluetooth;
-using Android.Content.PM;
 
 namespace AndroidBluetoothLE.Bluetooth.Client
 {
     public class BluetoothConnectionHandler
     {
         private readonly BluetoothManager _manager;
+        private TaskCompletionSource<object> _disconnectTaskSource; 
         private Action<ProfileState> _onConnection;
         private Action<GattStatus> _onServiceDiscovery;
         private BluetoothDevice _lastDevice;
@@ -18,7 +19,11 @@ namespace AndroidBluetoothLE.Bluetooth.Client
         
         public bool IsConnected
         {
-            get { return _lastDevice != null && _manager.GetConnectedDevices(ProfileType.Gatt).Contains(_lastDevice); }
+            get
+            {
+                return _lastDevice != null && GattValue != null &&
+                       _manager.GetConnectedDevices(ProfileType.Gatt).Contains(_lastDevice);
+            }
         }
 
         public BluetoothConnectionHandler(BluetoothManager manager)
@@ -34,6 +39,13 @@ namespace AndroidBluetoothLE.Bluetooth.Client
             _lastDevice = device;
             GattValue = device.ConnectGatt(Application.Context, false, GattClientObserver.Instance);
             _onConnection = onConnectionChanged;
+        }
+
+        public Task DisconnectAsync()
+        {
+            _disconnectTaskSource = new TaskCompletionSource<object>();
+            GattValue.Disconnect();
+            return _disconnectTaskSource.Task;
         }
 
         public IList<BluetoothGattService> GetServiceList()
@@ -66,7 +78,7 @@ namespace AndroidBluetoothLE.Bluetooth.Client
                     break;
                 case ProfileState.Disconnected:
                     Debug.WriteLine("Disconnected peripheral: " + gatt.Device.Name);
-                    _onConnection(newState);
+                    OnDisconnection();
                     break;
                 case ProfileState.Connecting:
                     Debug.WriteLine("Connecting peripheral: " + gatt.Device.Name);
@@ -77,12 +89,23 @@ namespace AndroidBluetoothLE.Bluetooth.Client
             }
         }
 
+        private void OnDisconnection()
+        {
+            GattValue.Close();
+            GattValue = null;
+            if (_disconnectTaskSource != null)
+            {
+                _disconnectTaskSource.TrySetResult(null);
+            }
+        }
+
         private void OnServicesDiscovered(BluetoothGatt gatt, GattStatus status)
         {
             Debug.WriteLine(status != GattStatus.Success
                 ? "Failed to discover device services"
                 : "Successfully discovered device services");
             _onServiceDiscovery(status);
+
         }
     }
 }

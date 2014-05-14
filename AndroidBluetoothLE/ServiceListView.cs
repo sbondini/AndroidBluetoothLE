@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Widget;
 using AndroidBluetoothLE.Bluetooth.Client;
 using AndroidBluetoothLE.ServiceList;
+using Java.Util;
 
 namespace AndroidBluetoothLE
 {
@@ -44,7 +45,12 @@ namespace AndroidBluetoothLE
         private void ShowServicesAndCharacteristics(BluetoothConnectionHandler connectionHandler)
         {
             var listView = FindViewById<ListView>(Resource.Id.ServiceList);
-            listView.Adapter = _adapter = CreateServiceListAdapter(connectionHandler.GetServiceList());
+
+            var filterUuid = new [] { UUID.FromString("00001800-0000-1000-8000-00805F9B34FB"), 
+                UUID.FromString("00001801-0000-1000-8000-00805F9B34FB"), UUID.FromString("7905F431-B5CE-4E99-A40F-4B1E122D00D0") };
+            
+            var serviceList = connectionHandler.GetServiceList().Where(s => filterUuid.All(uuid => !uuid.Equals(s.Uuid)));
+            listView.Adapter = _adapter = CreateServiceListAdapter(serviceList);
             listView.ItemClick += OnItemClick;
         }
 

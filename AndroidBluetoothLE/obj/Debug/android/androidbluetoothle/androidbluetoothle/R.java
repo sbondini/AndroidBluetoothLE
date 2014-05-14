@@ -15,22 +15,24 @@ public final class R {
     }
     public static final class id {
         public static final int DiscoverServicesButton=0x7f050001;
-        public static final int HexReadText=0x7f050005;
-        public static final int OpenServerAction=0x7f050008;
-        public static final int ReadCharacteristicButton=0x7f050004;
-        public static final int ReceivedNotificationHex=0x7f050002;
-        public static final int ReceivedNotificationString=0x7f050003;
+        public static final int HexReadText=0x7f050007;
+        public static final int OpenServerAction=0x7f05000a;
+        public static final int ReadCharacteristicButton=0x7f050006;
+        public static final int ReceivedNotificationHex=0x7f050004;
+        public static final int ReceivedNotificationString=0x7f050005;
         public static final int ReconnectButton=0x7f050000;
-        public static final int RowName=0x7f05000c;
-        public static final int ScanAction=0x7f050007;
-        public static final int ScanList=0x7f05000a;
-        public static final int ServiceList=0x7f05000b;
-        public static final int StringReadText=0x7f050006;
-        public static final int Type=0x7f05000e;
-        public static final int UuidValue=0x7f05000d;
-        public static final int WriteCharacteristicButton=0x7f050010;
-        public static final int WriteTextField=0x7f05000f;
-        public static final int label=0x7f050009;
+        public static final int RowName=0x7f05000e;
+        public static final int ScanAction=0x7f050009;
+        public static final int ScanList=0x7f05000c;
+        public static final int ServerRequestCaption=0x7f050002;
+        public static final int ServerRequestText=0x7f050003;
+        public static final int ServiceList=0x7f05000d;
+        public static final int StringReadText=0x7f050008;
+        public static final int Type=0x7f050010;
+        public static final int UuidValue=0x7f05000f;
+        public static final int WriteCharacteristicButton=0x7f050012;
+        public static final int WriteTextField=0x7f050011;
+        public static final int label=0x7f05000b;
     }
     public static final class layout {
         public static final int deviceview=0x7f030000;

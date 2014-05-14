@@ -39,13 +39,26 @@ namespace AndroidBluetoothLE
             InitializeListView();
             InvalidateOptionsMenu();
 
-            _bluetoothClient = BluetoothClient.Instance;
-            _bluetoothServer = BluetoothServer.Instance;
+            InitializeBluetoothClient();
+            InitializeBluetoothServer();
+        }
 
-            if (_bluetoothClient.Initialize())
+        private void InitializeBluetoothClient()
+        {
+            _bluetoothClient = BluetoothClient.Instance;
+            _bluetoothClient.Initialize();
+            if (_bluetoothClient.IsInitialized)
             {
                 _scanner = new BluetoothDeviceScanner(_bluetoothClient.Adapter, OnDiscoveredPeripheral);
             }
+        }
+
+        private void InitializeBluetoothServer()
+        {
+            _bluetoothServer = BluetoothServer.Instance;
+            GattServerObserver.Instance.ServiceAdded +=
+                (status, service) =>
+                    DialogView.ShowDialog("Server service uuid: " + BluetoothServiceFactory.ServiceUuid, this);
         }
 
         protected override void OnStop()

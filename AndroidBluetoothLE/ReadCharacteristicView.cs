@@ -12,7 +12,7 @@ using Java.Util;
 namespace AndroidBluetoothLE
 {
     [Activity(Label = "Read Characteristic")]
-    public class ReadCharacteristicView : Activity
+    public class ReadCharacteristicView : BaseCharacteristicView
     {
         private BluetoothGattCharacteristic _characteristic;
         private DeviceReadingHandler _readingHandler;

@@ -5,6 +5,9 @@ namespace AndroidBluetoothLE.Bluetooth.Server
 {
     public delegate void CharacteristicWriteRequestEventHandler(BluetoothDevice device, int requestId,
         BluetoothGattCharacteristic characteristic, bool preparedWrite, bool responseNeeded, int offset, byte[] value);
+    public delegate void ServerConnectionStateChangedEventHandler(BluetoothDevice device, ProfileState status, ProfileState newState);
+
+    public delegate void ServiceAddedEventHandler(ProfileState status, BluetoothGattService service);
 
     public class GattServerObserver : BluetoothGattServerCallback
     {
@@ -16,6 +19,8 @@ namespace AndroidBluetoothLE.Bluetooth.Server
         }
 
         public event CharacteristicWriteRequestEventHandler CharasteristicWriteRequested;
+        public event ServerConnectionStateChangedEventHandler ConnectionStateChanged;
+        public event ServiceAddedEventHandler ServiceAdded;
 
         public override void OnCharacteristicWriteRequest(BluetoothDevice device, int requestId, BluetoothGattCharacteristic characteristic,
             bool preparedWrite, bool responseNeeded, int offset, byte[] value)
@@ -30,11 +35,16 @@ namespace AndroidBluetoothLE.Bluetooth.Server
             
             Debug.WriteLineIf(newState == ProfileState.Connected, string.Format(message, "Connected"));
             Debug.WriteLineIf(newState == ProfileState.Disconnected, string.Format(message, "Disconnected"));
+
+            var handler = ConnectionStateChanged;
+            if (handler != null) handler(device, status, newState);
         }
 
         public override void OnServiceAdded(ProfileState status, BluetoothGattService service)
         {
             Debug.WriteLine("Added service " + service.Uuid);
+            var handler = ServiceAdded;
+            if (handler != null) handler(status, service);
         }
     }
 }

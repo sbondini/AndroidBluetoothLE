@@ -54,11 +54,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseCharacteristicView.cs" />
+    <Compile Include="Bluetooth\Client\DevicePairingHandler.cs" />
     <Compile Include="DialogView.cs" />
     <Compile Include="Bluetooth\Client\BluetoothClient.cs" />
     <Compile Include="Bluetooth\Client\BluetoothConnectionHandler.cs" />
     <Compile Include="Bluetooth\Client\DeviceNotifyingHandler.cs" />
-    <Compile Include="Bluetooth\Client\DevicePairingHandler.cs" />
     <Compile Include="Bluetooth\Client\DeviceReadingHandler.cs" />
     <Compile Include="Bluetooth\Client\DeviceWritingHandler.cs" />
     <Compile Include="Bluetooth\Client\BluetoothDeviceScanner.cs" />
